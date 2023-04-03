@@ -1,7 +1,7 @@
 <template>
     <Form @submit="submitContact" :validation-schema="contactFormSchema">
         <div class="form-group">
-            <label for="name">Tên</label>
+            <label for="name">Tên </label> 
             <Field name="name" type="text" class="form-control" v-model="contactLocal.name" />
             <ErrorMessage name="name" class="error-feedback" />
         </div>
