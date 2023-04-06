@@ -5,9 +5,24 @@ const commonConfig = {
         Accept: "application/json",
     },
 };
+
 export default (baseURL) => {
-    return axios.create({
+    const addToken =  axios.create({
         baseURL,
         ...commonConfig,
     });
+    addToken.interceptors.request.use(
+        (config) => {
+            const token = localStorage.getItem("token");
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
+        },
+        (error) => {
+            return Promise.reject(error);
+        }
+    );
+
+    return addToken;
 };

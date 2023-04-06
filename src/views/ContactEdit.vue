@@ -3,8 +3,6 @@
         <h4>Hiệu chỉnh Liên hệ</h4>
         <ContactForm :contact="contact" @submit:contact="updateContact" @delete:contact="deleteContact" />
         <p>{{ message }}</p>
-    
-       
     </div>
 </template>
 <script>
@@ -14,6 +12,7 @@ export default {
     components: {
         ContactForm,
     },
+    //Truyền từ cha xuống con (từ ContactBook -> ContactEdit)
     props: {
         id: { type: String, required: true },
     },
@@ -25,8 +24,10 @@ export default {
     },
     methods: {
         async getContact(id) {
+          
             try {
                 this.contact = await ContactService.get(id);
+             
             } catch (error) {
                 console.log(error);
                 // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -44,7 +45,6 @@ export default {
             try {
                 await ContactService.update(this.contact._id, data);
                 this.message = "Liên hệ được cập nhật thành công.";
-               
             } catch (error) {
                 console.log(error);
             }

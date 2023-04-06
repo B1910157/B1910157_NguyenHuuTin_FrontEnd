@@ -20,6 +20,8 @@
                 <button class="btn btn-sm btn-danger" @click="removeAllContacts">
                     <i class="fas fa-trash"></i> Xóa tất cả
                 </button>
+                <!-- {{ this.contacts }} -->
+             
             </div>
         </div>
         <div class="mt-3 col-md-6">
@@ -60,6 +62,7 @@ export default {
             contacts: [],
             activeIndex: -1,
             searchText: "",
+            
         };
     },
     watch: {
@@ -73,6 +76,7 @@ export default {
         // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
         contactStrings() {
             return this.contacts.map((contact) => {
+               
                 const { name, email, address, phone } = contact;
                 return [name, email, address, phone].join("");
             });
@@ -84,6 +88,7 @@ export default {
                 this.contactStrings[index].includes(this.searchText)
             );
         },
+        
         activeContact() {
             if (this.activeIndex < 0) return null;
             return this.filteredContacts[this.activeIndex];
